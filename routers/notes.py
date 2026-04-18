@@ -15,16 +15,21 @@ router=APIRouter(
 
 @router.get("/",response_model=list[schemas.NoteReturn])
 def get_all_notes(db:Session=Depends(get_db),current_user:int=Depends(Oauth2.get_current_user),
-                 lim:int=4,skip:int=0,search:Optional[str]=""):
+                 lim:int=4,skip:int=0,search:Optional[str]="",bookmark: Optional[bool] = None):
     #cursor.execute("""SELECT * FROM notes""")
     #notes=cursor.fetchall()
 
-    notes=db.query(models.Note).filter(
+    query=db.query(models.Note).filter(
         models.Note.account_id==current_user.id,
         or_(
             models.Note.title.contains(search),
             models.Note.content.contains(search)        
-            )).limit(lim).offset(skip).all()
+            ))
+
+    if bookmark is not None:
+        query=query.filter(models.Note.bookmark==bookmark)    
+
+    notes=query.limit(lim).offset(skip).all()    
     return notes
 
 @router.post("/",response_model=schemas.NoteReturn,status_code=status.HTTP_201_CREATED)

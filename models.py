@@ -2,7 +2,7 @@ from tkinter import CASCADE
 
 from sqlalchemy.sql.expression import text
 from database import Base
-from sqlalchemy import TIMESTAMP, Column,Integer,String,ForeignKey
+from sqlalchemy import TIMESTAMP, Boolean, Column,Integer,String,ForeignKey
 
 class Note(Base):
     __tablename__="notes"
@@ -11,6 +11,7 @@ class Note(Base):
     content=Column(String,nullable=False)
     created_at=Column(TIMESTAMP(timezone=True),nullable=False,server_default=text('now()'))
     account_id=Column(Integer,ForeignKey("accounts.id",ondelete="CASCADE"),nullable=False)
+    bookmark=Column(Boolean,default=False,nullable=True)
 
 class User(Base):
     __tablename__="accounts"

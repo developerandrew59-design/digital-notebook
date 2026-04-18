@@ -1,10 +1,12 @@
 from pydantic import BaseModel, EmailStr
 from datetime import datetime
+from typing import Optional
 
 
 class NoteBase(BaseModel):
     title:str
     content:str
+    bookmark: Optional[bool] = False
 
 class NoteCreate(NoteBase):
     pass
