@@ -11,18 +11,21 @@ class NoteBase(BaseModel):
 class NoteCreate(NoteBase):
     pass
 
+class UserOut(BaseModel):
+    email:EmailStr
+    id:int
+    created_at: datetime 
+
 class NoteReturn(NoteCreate):
     id:int
     created_at:datetime
+    
+    
 
 class UserCreate(BaseModel):
     email:EmailStr
     password:str
-
-class UserOut(BaseModel):
-    email:EmailStr
-    id:int
-    created_at: datetime   
+ 
 
 class Token(BaseModel):
     acess_token:str
