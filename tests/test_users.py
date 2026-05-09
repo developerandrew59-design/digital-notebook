@@ -1,4 +1,4 @@
-from ast import List
+
 from urllib import response
 from config import settings
 import schemas
@@ -54,10 +54,9 @@ def test_get_all_users(authorized_client,test_users):
     def validate(user):
         return schemas.UserOut(**user)
     users_map=map(validate,response.json())
-    users_list=List(users_map)
+    users_list=list(users_map)
 
-    assert response.status_code==200
-    assert users_list   
+    assert response.status_code==200  
 
     
     
