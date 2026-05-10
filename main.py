@@ -7,22 +7,22 @@ from database import engine, get_db
 from sqlalchemy.orm import Session
 from routers import notes,users,auth
 
-while True:
-    try:
-        conn=psycopg2.connect( host="db",
-        database="mydb",
-        user="postgres",
-        password="mysecretpassword",
-        port=5432,
-        cursor_factory=RealDictCursor)
+#while True:
+#    try:
+#        conn=psycopg2.connect( host="db",
+#        database="mydb",
+#        user="postgres",
+#        password="mysecretpassword",
+#        port=5432,
+#        cursor_factory=RealDictCursor)
 
-        cursor=conn.cursor()
-        print("Database connection was sucessful")
-        break
-    except Exception as error:
-        print("connection to database failed")
-        print("Error",error)
-        time.sleep(2)    
+#        cursor=conn.cursor()
+#        print("Database connection was sucessful")
+#        break
+#    except Exception as error:
+#        print("connection to database failed")
+#        print("Error",error)
+#        time.sleep(2)    
 
 models.Base.metadata.create_all(bind=engine)
 app = FastAPI()
