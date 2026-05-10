@@ -24,7 +24,7 @@ from routers import notes,users,auth
 #        print("Error",error)
 #        time.sleep(2)    
 
-models.Base.metadata.create_all(bind=engine)
+#models.Base.metadata.create_all(bind=engine)
 app = FastAPI()
 
 app.include_router(notes.router)
